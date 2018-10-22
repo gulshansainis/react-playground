@@ -196,3 +196,5 @@ export default hot(module)(App);
 - Restart App ```npm start```
 - Make change in App.js file
 - Browser automatically now load the changes
+
+[Source](https://blog.usejournal.com/creating-a-react-app-from-scratch-f3c693b84658)
