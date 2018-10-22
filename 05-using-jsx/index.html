@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Using JSX</title>
+</head>
+
+<body>
+
+  <h2>Using JSX</h2>
+
+  <!-- root component to load react component -->
+  <div id="root"></div>
+
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- add babel@6 to add support for JSX-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+
+  <!-- Load our React component. -->
+  <script type="text/babel">
+    ReactDOM.render(<button onClick={() => alert('You clicked like button')}>Like</button>, document.getElementById('root'));
+    </script>
+
+</body>
+
+</html>
