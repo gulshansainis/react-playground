@@ -31,7 +31,7 @@ touch public/index.html
 ```
 
 ## Step 3
-Add bebel support
+Add babel support
 ```
 npm install --save-dev @babel/core@7.1.0 @babel/cli@7.1.0 @babel/preset-env@7.1.0 @babel/preset-react@7.0.0
 ```
