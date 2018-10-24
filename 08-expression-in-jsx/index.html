@@ -8,7 +8,7 @@
     body {
       margin: 0;
       padding: 10px;
-      font-size: 12px;
+      font-size: 9px;
     }
   </style>
 </head>
@@ -34,6 +34,12 @@
     
     // JSX assigned to variable
     let home = (<span>🏠  </span>);
+
+    // boolean fake condition
+    let condition = false;
+
+    let items = [1,2,3,4];
+
     /* 
     * 1. use name variable inside JSX by wrapping it in curly braces
     * 2. to render multiple tags, wrap inside parent div
@@ -45,6 +51,10 @@
         <p>🔥 Hello, {name.toLowerCase()} in lower case</p>
         <p>🔥 Hello, {emphasise(name)} in upper case</p>
         <p>🔥 Welcome to {home}</p>
+        <h4>If example</h4>
+        <div>Condition is {condition ? '✅' : '🚫'}</div>
+        <h4>Map/loop example</h4>
+        <ol>{items.map((item) => <li>item</li> )}</ol>
       </div>)
 
 
