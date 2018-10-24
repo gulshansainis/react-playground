@@ -4,6 +4,13 @@
 <head>
   <meta charset="UTF-8" />
   <title>Expressions in JSX</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      font-size: 12px;
+    }
+  </style>
 </head>
 
 <body>
@@ -21,12 +28,43 @@
 
   <!-- Load our React component. -->
   <script type="text/babel">
+    
     // we declare a variable called name
     const name = "Gulshan Saini";
-    // use name variable inside JSX by wrapping it in curly braces
-    const element = <h2>Hello, {name}</h2>;
+    
+    // JSX assigned to variable
+    let home = (<span>🏠  </span>);
+    /* 
+    * 1. use name variable inside JSX by wrapping it in curly braces
+    * 2. to render multiple tags, wrap inside parent div
+    * 3. we can use any valid javascript expression
+    */
+    let element = (
+      <div>
+        <p>🔥 Hello, {name}</p>
+        <p>🔥 Hello, {name.toLowerCase()} in lower case</p>
+        <p>🔥 Hello, {emphasise(name)} in upper case</p>
+        <p>🔥 Welcome to {home}</p>
+      </div>)
+
+
+    // JSX inside if loop
+
+    // JSX inside for loop
+
+    // JSX accepted as argument
+    function underline(jsx){
+      return (<u>{jsx}</u>);
+    }
+
+    // return JSX from function
+    function emphasise(string){
+      return (underline(<span>{string.toUpperCase()}</span>));
+    }
+    
     const rootElement = document.getElementById('root');
     ReactDOM.render(element, rootElement);
+
     </script>
 
 </body>
