@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Component life cycle hooks</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      font-size: 9px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Component life cycle hooks</h2>
+
+  <div id="root"></div>
+
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- add babel@6 to add support for JSX-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+
+
+  <!-- Load our React component. -->
+  <script type="text/babel">
+    
+    class Clock extends React.Component {
+      constructor(props){
+        super(props);
+        this.state = {
+          time: new Date()
+        }
+      }
+
+      // run after component is displayed
+      componentDidMount(){
+        console.log('component is displayed');
+        this.timer = setInterval(() => this.updateClock() , 1000);
+      }
+      
+      // run after component is about to be removed
+      componentWillUnmount() {
+        console.log('component is about to be removed');
+        clearInterval(this.timer);
+      }
+
+      updateClock(){
+        this.setState({time: new Date()});
+      }
+
+      render(){
+        return (
+          <p>Time now is {this.state.time.toLocaleTimeString() }</p>
+        );
+      }
+    }
+
+    const rootElement = document.getElementById('root');
+    ReactDOM.render(
+      <Clock/>, 
+      rootElement);
+
+    // remove component after 5 seconds
+    setTimeout(() => {
+      ReactDOM.render(<div>Clock is destroyed after 5 seconds</div>, rootElement);
+    }, 5000);
+  </script>
+
+</body>
+
+</html>
