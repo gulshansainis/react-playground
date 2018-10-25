@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Expressions in JSX</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      font-size: 9px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Creating element in react</h2>
+
+  <div id="root"></div>
+
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- add babel@6 to add support for JSX-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+
+
+  <!-- Load our React component. -->
+  <script type="text/babel">
+    function ComponentOne(props){
+      return <h3>I am component created from :: <u>{props.name}</u></h3>;
+    }
+
+    class ComponentTwo extends React.Component {
+      render(){
+        return <h3>I am component created from :: <u>{this.props.name}</u></h3>;
+      }
+    }
+
+    const rootElement = document.getElementById('root');
+    ReactDOM.render(
+      <div>
+        <ComponentOne name="functional"></ComponentOne>
+        <ComponentTwo name="class"></ComponentTwo>
+      </div>, 
+      rootElement);
+  </script>
+
+</body>
+
+</html>
