@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Rendering components based on conditon</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px;
+      border-radius: 25px;
+      box-shadow: 1px 1px 10px grey;
+      outline:none;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Conditional Rendering</h2>
+
+  <div id="root"></div>
+
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- add babel@6 to add support for JSX-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+
+
+  <!-- Load our React component. -->
+  <script type="text/babel">
+
+    class LoginHandler extends React.Component {
+      constructor(props){
+        super(props);
+        this.state = {
+          isLoggedIn: false
+        }
+        this.toggleLogin = this.toggleLogin.bind(this);
+      }
+
+      toggleLogin() {
+        this.setState({isLoggedIn: !this.state.isLoggedIn})
+      }
+
+      render(){
+        const isLoggedIn = this.state.isLoggedIn;
+        return (
+          <div>
+            <h2>{ isLoggedIn ? 'You are logged in!!!' : 'Login Please' }</h2>
+            { isLoggedIn ? <Logout toggleLogin={this.toggleLogin} /> : <Login toggleLogin={this.toggleLogin} /> }
+          </div>
+          )
+      }
+    }
+
+    function Login(props){
+      console.log('Rendering Login button');
+      return <button onClick={props.toggleLogin}>Login</button>
+    }
+
+    function Logout(props){
+      console.log('Rendering Logout button');
+      return <button onClick={props.toggleLogin}>Logout</button>
+    }
+
+    const rootElement = document.getElementById('root');
+    ReactDOM.render(<LoginHandler/>,rootElement);
+  </script>
+
+</body>
+
+</html>
