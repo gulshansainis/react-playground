@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Basic event handling</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px;
+      border-radius: 25px;
+      box-shadow: 1px 1px 10px grey;
+      outline:none;
+      margin-right: 5px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Basic event handling</h2>
+
+  <div id="root"></div>
+
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- add babel@6 to add support for JSX-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+
+
+  <!-- Load our React component. -->
+  <script type="text/babel">
+
+    function ButtonFunctionComponent(props){
+
+      function handleClick(e) {
+        e.preventDefault();
+        alert('ButtonFunctionComponent::The link was clicked.');
+      }
+
+      return <button onClick={handleClick}>{props.name}</button>
+    }
+
+    class ButtonClassComponent extends React.Component {
+      constructor(props){
+        super(props);
+        this.state = {isToggleOn: true};
+        this.handleClick = this.handleClick.bind(this);
+      }
+
+      handleClick(){
+        this.setState(state => ({
+          isToggleOn: !state.isToggleOn
+        }));
+        let alertText = `ButtonClassComponent:: state is ${JSON.stringify(this.state)}`;
+        alert(alertText);
+      }
+
+      render(){
+        return <button onClick={this.handleClick}>{this.props.name}</button>
+      }
+    }
+
+    const rootElement = document.getElementById('root');
+    ReactDOM.render(
+      <div>
+        <ButtonFunctionComponent name="Functional Button"/>
+        <ButtonClassComponent name="Class Button"/>
+      </div>,
+      rootElement);
+  </script>
+
+</body>
+
+</html>
