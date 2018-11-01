@@ -44,12 +44,12 @@
   <script type="text/babel">
 
     function List(props){
-      return props.items.map(item => <li>{item}</li>);
+      return <ul>{props.items.map(item => <li>{item}</li>)}</ul>;
     }
 
     const rootElement = document.getElementById('root');
     let listItems = ['👑', '🐢', '🐱', '🐺', '🐒'];
-    ReactDOM.render(<ul><List items={listItems}/></ul>,rootElement);
+    ReactDOM.render(<List items={listItems}/>,rootElement);
   </script>
 
 </body>
