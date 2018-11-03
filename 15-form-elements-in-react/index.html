@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Form elements in react</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      font-size: 9px;
+    }
+    ul {
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      border-left: 3px solid;
+      list-style-type: none;
+      margin-bottom: 3px;
+      padding: 5px;
+      border-image: linear-gradient(to left, #9fb8ad, #bbbbbb) 1 100%;
+      background-image: linear-gradient(to right, #f7f7f7, #dedede);
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>React Form Example</h1>
+  <h3>input, textarea, select, radio button example</h3>
+
+  <div id="root"></div>
+
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- add babel@6 to add support for JSX-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+
+
+  <!-- Load our React component. -->
+  <script type="text/babel">
+
+    class TextInput extends React.Component {
+      constructor(props){
+        super(props);
+        this.state = {
+          name : this.props.name,
+          type : this.props.type,
+          value : this.props.value
+        }
+
+        this.valueOnChange = this.valueOnChange.bind(this);
+      }
+
+      valueOnChange(e){
+        this.setState({ value : e.target.value })
+      }
+      
+      render() {
+        return (<label for={this.state.name}><input name={this.state.name} type={this.state.type} onChange={this.valueOnChange} value={this.state.value}/></label>)
+      }
+    }
+
+    class TextAreaInput extends React.Component {
+      constructor(props){
+        super(props);
+        this.state = {
+          name : this.props.name,
+          type : this.props.type,
+          value : this.props.value
+        }
+
+        this.valueOnChange = this.valueOnChange.bind(this);
+      }
+
+      valueOnChange(e){
+        this.setState({ value : e.target.value })
+      }
+      
+      render() {
+        return (<label for={this.state.name}><textarea name={this.state.name} type={this.state.type} onChange={this.valueOnChange} value={this.state.value}/></label>)
+      }
+    }
+
+    class RadioInput extends React.Component {
+      constructor(props){
+        super(props);
+        this.state = {
+          name : this.props.name,
+          value : this.props.value
+        }
+
+        this.valueOnChange = this.valueOnChange.bind(this);
+      }
+
+      valueOnChange(e){
+        this.setState({ value : e.target.value })
+      }
+      
+      render() {
+        return (<label for={this.state.name}><input name={this.state.name} type="radio" onChange={this.valueOnChange} value={this.state.value}/></label>)
+      }
+    }
+
+    class SelectList extends React.Component {
+      constructor(props){
+        super(props);
+        this.state = {
+          name : this.props.name,
+          items : this.props.items,
+          value: ""
+        }
+
+        this.valueOnChange = this.valueOnChange.bind(this);
+      }
+
+      valueOnChange(e){
+        this.setState({ value : e.target.value })
+      }
+      
+      render() {
+        return (<label for={this.state.name}><select onChange={this.valueOnChange} value={this.state.value}>{this.state.items.map(item => <option value={item}>{item}</option>)}</select></label>)
+      }
+    }
+
+    class FormComponent extends React.Component {
+
+      constructor(props){
+          super(props);
+          this.state = {
+            firstname: "",
+            lastname: "",
+            bio: "",
+            gender: "",
+            age: ""
+          }
+          this.onFirstNameChange = this.onFirstNameChange.bind(this);
+          this.onLastNameChange = this.onLastNameChange.bind(this);
+          this.onBioChange = this.onBioChange.bind(this);
+          this.onGenderChange = this.onGenderChange.bind(this);
+          this.onAgeChange = this.onAgeChange.bind(this);
+          this.onSubmit = this.onSubmit.bind(this);
+      }
+
+      onFirstNameChange(event) {
+        this.setState( {
+          firstname: event.target.value
+        })
+      }
+
+      onLastNameChange(event) {
+        this.setState( {
+          lastname: event.target.value
+        })
+      }
+
+      onBioChange(event) {
+        this.setState( {
+          bio: event.target.value
+        })
+      }
+
+      onGenderChange(event) {
+        this.setState( {
+          gender: event.target.value
+        })
+      }
+
+      onAgeChange(event) {
+        this.setState( {
+          age: event.target.value
+        })
+      }
+
+      onSubmit(event){
+        event.preventDefault();
+        console.log(this.state);
+      }
+
+      render() {
+          const age = [18, 19, 20];
+        return (
+          <form onSubmit={this.onSubmit}>
+            <input placeholder="first name" name="firstname" onChange={this.onFirstNameChange} type="text" value={this.state.firstname}/><br/>
+            <input placeholder="last name" name="lastname" onChange={this.onLastNameChange} type="text" value={this.state.lastname}/><br/>
+            <textarea placeholder="bio" name="bio" onChange={this.onBioChange} type="text" value={this.state.bio}></textarea><br/>
+            <input type="radio" checked onChange={this.onGenderChange} name="gender" value="male"/><br/>
+            <input type="radio" onChange={this.onGenderChange} name="gender" value="female"/><br/>
+            <select name="age" onChange={this.onAgeChange} value={this.state.age}>{age.map(item => <option value={item}>{item}</option>)}</select><br/><br/>
+            <button type="submit">Submit</button>
+          </form>
+        )
+      }
+    }
+    const rootElement = document.getElementById('root');
+    ReactDOM.render(<FormComponent/>,rootElement);
+  </script>
+
+</body>
+
+</html>
