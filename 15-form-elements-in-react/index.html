@@ -42,90 +42,6 @@
 
   <!-- Load our React component. -->
   <script type="text/babel">
-
-    class TextInput extends React.Component {
-      constructor(props){
-        super(props);
-        this.state = {
-          name : this.props.name,
-          type : this.props.type,
-          value : this.props.value
-        }
-
-        this.valueOnChange = this.valueOnChange.bind(this);
-      }
-
-      valueOnChange(e){
-        this.setState({ value : e.target.value })
-      }
-      
-      render() {
-        return (<label for={this.state.name}><input name={this.state.name} type={this.state.type} onChange={this.valueOnChange} value={this.state.value}/></label>)
-      }
-    }
-
-    class TextAreaInput extends React.Component {
-      constructor(props){
-        super(props);
-        this.state = {
-          name : this.props.name,
-          type : this.props.type,
-          value : this.props.value
-        }
-
-        this.valueOnChange = this.valueOnChange.bind(this);
-      }
-
-      valueOnChange(e){
-        this.setState({ value : e.target.value })
-      }
-      
-      render() {
-        return (<label for={this.state.name}><textarea name={this.state.name} type={this.state.type} onChange={this.valueOnChange} value={this.state.value}/></label>)
-      }
-    }
-
-    class RadioInput extends React.Component {
-      constructor(props){
-        super(props);
-        this.state = {
-          name : this.props.name,
-          value : this.props.value
-        }
-
-        this.valueOnChange = this.valueOnChange.bind(this);
-      }
-
-      valueOnChange(e){
-        this.setState({ value : e.target.value })
-      }
-      
-      render() {
-        return (<label for={this.state.name}><input name={this.state.name} type="radio" onChange={this.valueOnChange} value={this.state.value}/></label>)
-      }
-    }
-
-    class SelectList extends React.Component {
-      constructor(props){
-        super(props);
-        this.state = {
-          name : this.props.name,
-          items : this.props.items,
-          value: ""
-        }
-
-        this.valueOnChange = this.valueOnChange.bind(this);
-      }
-
-      valueOnChange(e){
-        this.setState({ value : e.target.value })
-      }
-      
-      render() {
-        return (<label for={this.state.name}><select onChange={this.valueOnChange} value={this.state.value}>{this.state.items.map(item => <option value={item}>{item}</option>)}</select></label>)
-      }
-    }
-
     class FormComponent extends React.Component {
 
       constructor(props){
@@ -134,7 +50,7 @@
             firstname: "",
             lastname: "",
             bio: "",
-            gender: "",
+            gender: "male",
             age: ""
           }
           this.onFirstNameChange = this.onFirstNameChange.bind(this);
@@ -187,8 +103,8 @@
             <input placeholder="first name" name="firstname" onChange={this.onFirstNameChange} type="text" value={this.state.firstname}/><br/>
             <input placeholder="last name" name="lastname" onChange={this.onLastNameChange} type="text" value={this.state.lastname}/><br/>
             <textarea placeholder="bio" name="bio" onChange={this.onBioChange} type="text" value={this.state.bio}></textarea><br/>
-            <input type="radio" checked onChange={this.onGenderChange} name="gender" value="male"/><br/>
-            <input type="radio" onChange={this.onGenderChange} name="gender" value="female"/><br/>
+            <input type="radio" checked={this.state.gender==='male' ? true : false} onChange={this.onGenderChange} name="gender" value="male"/><br/>
+            <input type="radio" checked={this.state.gender==='female' ? true : false} onChange={this.onGenderChange} name="gender" value="female"/><br/>
             <select name="age" onChange={this.onAgeChange} value={this.state.age}>{age.map(item => <option value={item}>{item}</option>)}</select><br/><br/>
             <button type="submit">Submit</button>
           </form>
