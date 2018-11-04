@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Custom form child elements in react</title>
+  <style>
+    body {
+         margin: 0;
+         padding: 10px;
+         font-size: 9px;
+         }
+         ul {
+         padding: 0;
+         margin: 0;
+         }
+         li {
+         border-left: 3px solid;
+         list-style-type: none;
+         margin-bottom: 3px;
+         padding: 5px;
+         border-image: linear-gradient(to left, #9fb8ad, #bbbbbb) 1 100%;
+         background-image: linear-gradient(to right, #f7f7f7, #dedede);
+         }
+      </style>
+</head>
+
+<body>
+  <h1>Custom form child elements in react</h1>
+  
+  <div id="root"></div>
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- add babel@6 to add support for JSX-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+  <!-- Load our React component. -->
+  <script type="text/babel">
+         class TextInput extends React.Component {
+           render(){
+              return (<input type="text" value={this.props.value} onChange={this.props.handleChange} />)
+            }
+         }
+         
+         class FormComponent extends React.Component {
+         
+         constructor(props){
+           super(props);
+           this.state = {
+             value: this.props.value
+           }
+
+           this.handleChange = this.handleChange.bind(this);
+         }
+         
+         handleChange(event){
+           this.setState({
+             value: event.target.value
+           })
+         }
+         
+         render() {
+           return (
+             <form onSubmit={this.onSubmit}>
+             <TextInput type="text" value={this.state.value} handleChange={this.handleChange}/>
+             <button type="submit">Submit</button>
+             </form>
+             )
+             }
+          }
+         const rootElement = document.getElementById('root');
+         ReactDOM.render(<FormComponent/>,rootElement);
+      </script>
+</body>
+
+</html>
