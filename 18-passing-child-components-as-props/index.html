@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Passing child components as props</title>
+  <style>
+    html, body, #root {
+        width: 100%;
+        height: 100%;
+      }
+
+      .SplitPane {
+        width: 100%;
+        height: 100%;
+      }
+
+      .SplitPane-left {
+        float: left;
+        width: 30%;
+        height: 100%;
+      }
+
+      .SplitPane-right {
+        float: left;
+        width: 70%;
+        height: 100%;
+      }
+
+      .Contacts {
+        width: 100%;
+        height: 100%; 
+        background: lightblue;
+      }
+
+      .Chat {
+        width: 100%;
+        height: 100%; 
+        background: pink;
+      }
+      </style>
+</head>
+
+<body>
+  <h1>Passing child components as props</h1>
+
+  <div id="root"></div>
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+  <!-- add babel@6 to add support for JSX-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js" crossorigin></script>
+  <!-- Load our React component. -->
+  <script type="text/babel">
+
+  function Contacts() {
+    return <div className="Contacts" />;
+  }
+
+  function Chat() {
+    return <div className="Chat" />;
+  }
+
+  function SplitPane(props) {
+    return (
+      <div className="SplitPane">
+        <div className="SplitPane-left">
+          {props.left}
+        </div>
+        <div className="SplitPane-right">
+          {props.right}
+        </div>
+      </div>
+    );
+  }
+         
+         const rootElement = document.getElementById('root');
+         ReactDOM.render(
+          <SplitPane left={<Contacts />} right={<Chat />} />
+          ,rootElement);
+      </script>
+</body>
+
+</html>
